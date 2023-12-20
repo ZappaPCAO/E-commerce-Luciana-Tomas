@@ -1,0 +1,10 @@
+<div class="card d-flex w-100 m-2">
+    <div class="imgContainer w-100">
+        <img src="{{ product.images[0] }}" (error)="cambiarImagen($event)" class="img card-img-top w-100" />
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{this.product.title}}</h5>
+        <p class="card-text">{{this.product.description}}</p>
+        <a class="btn btn-primary" (click)="updateProduct()">Editar</a>
+    </div>
+</div>

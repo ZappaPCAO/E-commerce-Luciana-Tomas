@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-12">
+        <h2>Nuevo Usuario</h2>
+        <hr>
+        <form #miForm="ngForm" (ngSubmit)="createProduct(miForm)">
+            <div class="row p-2">
+                <div class="col-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input name="title" class="form-control border-2" [(ngModel)]="this.service.producto.title" type="text"
+                            placeholder="Titulo">
+                        <label>Título:</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input name="price" class="form-control border-2" [(ngModel)]="this.service.producto.price"
+                            type="number" min="1" placeholder="">
+                        <label>¨Precio:</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3 mb-md-0 p-2">
+                <textarea name="description" class="form-control" [(ngModel)]="this.service.producto.description" type="text"
+                    placeholder=""></textarea>
+                <label>Descripción: </label>
+            </div>
+            <div class="row p-2">
+                <div class="col-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <select name="categoryId" class="form-control" [(ngModel)]="this.service.producto.categoryId">
+                            <option value="1">1</option>
+                        </select>
+                        <label>Categoría:</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control border-2" name="images" type="url" [(ngModel)]="this.service.producto.images">
+                        <label>Imágenes:</label>
+                    </div>
+                </div>
+            </div>          
+            <button class="btn btn-primary m-2" type="submit">Guardar</button>
+        </form>
+    </div>
+</div>
