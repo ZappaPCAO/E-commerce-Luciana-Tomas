@@ -11,6 +11,7 @@ import { Product } from 'src/app/models/product';
 export class CardDetailComponent implements OnInit{
 
   producto!: Product;
+  
 
   constructor(private route: ActivatedRoute,
     public service: ProductServiceService){}
@@ -25,5 +26,25 @@ export class CardDetailComponent implements OnInit{
       })
 
     });
+  }
+
+
+  public addProduct() { 
+    // Obtener el arreglo del localStorage si existe, o inicializar uno vacío
+    const cart = JSON.parse(localStorage.getItem("items") || "[]");
+  
+    //Validar si el arreglo ya contiene un objeto con el mismo nombre
+    const itemExistente: Product = cart.find((objeto: Product) => objeto.id === this.producto.id);
+  
+    if (itemExistente) {
+          // Si el objeto ya existe, actualizar la cantidad
+          itemExistente.cant! += this.producto.cant!;
+      } else {
+          // Si el objeto no existe, agregar uno nuevo al arreglo
+          const newItem: Product = this.producto;
+          cart.push(newItem);
+      }
+    // Guardar el arreglo actualizado en el localStorage
+      localStorage.setItem('items', JSON.stringify("cart"));
   }
 }
