@@ -12,6 +12,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { CardDetailComponent } from './components/card-detail/card-detail.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 
@@ -23,7 +24,8 @@ import { CardDetailComponent } from './components/card-detail/card-detail.compon
     NavbarComponent,
     ProductFormComponent,
     ProductCardComponent,
-    CardDetailComponent
+    CardDetailComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
