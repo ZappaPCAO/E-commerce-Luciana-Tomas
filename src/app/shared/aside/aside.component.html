@@ -16,11 +16,14 @@
             </div>
             <div class="col-6">
                 <div class="form-floating mb-3 mb-md-0">
-                    <input name="price" class="form-control border-2" [(ngModel)]="price"
-                        type="number" min="1" placeholder="">
-                    <label>Precio: </label>
+                    <select name="categoryId" class="form-control" [(ngModel)]="idCategory">
+                        <option *ngFor="let category of categories" value="{{category.id}}">
+                            {{category.name}}
+                        </option>
+                    </select>
+                    <label>Categoría:</label>
                 </div>
-            </div>           
+            </div>         
         </div>
         <div class="row p-4">
             <div class="col-6">
@@ -37,19 +40,7 @@
                     <label>Precio max:</label>
                 </div>
             </div>            
-        </div>    
-        <div class="row p-4">
-            <div class="col-12">
-                <div class="form-floating mb-3 mb-md-0">
-                    <select name="categoryId" class="form-control" [(ngModel)]="idCategory">
-                        <option *ngFor="let category of categories" value="{{category.id}}">
-                            {{category.name}}
-                        </option>
-                    </select>
-                    <label>Categoría:</label>
-                </div>
-            </div>
-        </div>
+        </div>        
         <div class="row ms-3">
             <div class="col-12">
                 <button class="btn btn-outline-success" (click)="verifFilter()" >Filtrar</button>

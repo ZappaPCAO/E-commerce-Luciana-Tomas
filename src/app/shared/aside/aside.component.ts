@@ -15,7 +15,6 @@ export class AsideComponent implements OnInit{
   idCategory!: number; //Para filtrar
 
   title!: string;
-  price!: number;
   priceMin!: number;
   priceMax!: number;
   
@@ -64,16 +63,17 @@ export class AsideComponent implements OnInit{
         rutasParametros += `${this.title}`;
       }
     }
-    if(this.price){
-      // Si es el primer filtro que aplica..
-      if(!filtroConcat){
-        filtroConcat += `price=${this.price}`;
-        rutasParametros += `${this.price}`;
-      }else{
-        filtroConcat += `&price=${this.price}`;
-        rutasParametros += `/${this.price}`;
-      }
-    }
+
+    // if(this.price ){
+    //   // Si es el primer filtro que aplica..
+    //   if(!filtroConcat){
+    //     filtroConcat += `price=${this.price}`;
+    //     rutasParametros += `${this.price}`;
+    //   }else{
+    //     filtroConcat += `&price=${this.price}`;
+    //     rutasParametros += `/${this.price}`;
+    //   }
+    // }
     if (this.idCategory ){
       if(!filtroConcat){
         filtroConcat += `categoryId=${this.idCategory}`;
@@ -83,7 +83,7 @@ export class AsideComponent implements OnInit{
         rutasParametros += `/${this.idCategory}`;
       }
     }
-    if ( this.priceMin || this.priceMax ) {
+    if ( this.priceMin && this.priceMax ) {
       // Si es el primer filtro que aplica..
       if(!filtroConcat){
         filtroConcat += `price_min=${this.priceMin}&price_max=${this.priceMax}`;
@@ -92,8 +92,24 @@ export class AsideComponent implements OnInit{
         filtroConcat += `&price_min=${this.priceMin}&price_max=${this.priceMax}`;
         rutasParametros += `/${this.priceMin}/${this.priceMax}`;
       }      
+    }else if(this.priceMin){ // Solo min
+      if(!filtroConcat){
+            filtroConcat += `price=${this.priceMin}`;
+            rutasParametros += `${this.priceMin}`;
+          }else{
+            filtroConcat += `&price=${this.priceMin}`;
+            rutasParametros += `/${this.priceMin}`;
+          }
+    }else if(this.priceMax){ // Solo max
+      if(!filtroConcat){
+        filtroConcat += `price_min=1&price_max=${this.priceMax}`;
+        rutasParametros += `1/${this.priceMax}`;
+      }else{
+        filtroConcat += `&price_min=1&price_max=${this.priceMax}`;
+        rutasParametros += `/1/${this.priceMax}`;
+      }      
     }
-
+    console.log('soy yo => ', filtroConcat);
     this.service.getByJoinFilter(filtroConcat).subscribe((products: Product[]) => {
       this.service.productList = products;
     })
