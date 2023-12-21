@@ -6,11 +6,11 @@
     </div>
     <div class="offcanvas-body">
         <button class="btn btn-primary " (click)="filterByTitle()" >Título</button>
-        <button class="btn btn-primary " (click)="filterByPrice()" >Algo 2</button>
-        <button class="btn btn-primary " (click)="filterByPriceRange()" >Algo 3</button>
+        <button class="btn btn-primary " (click)="filterByPrice()" >Precio</button>
+        <button class="btn btn-primary " (click)="filterByPriceRange()" >Rango</button>
         <input type="text" [(ngModel)]="title">
-        <input type="text" [(ngModel)]="price">
-        <input type="text" [(ngModel)]="priceMin" placeholder="Min">
-        <input type="text" [(ngModel)]="priceMax" placeholder="Max">
+        <input type="number" [(ngModel)]="price">
+        <input type="number" [(ngModel)]="priceMin" placeholder="Min">
+        <input type="number" [(ngModel)]="priceMax" placeholder="Max">
     </div>
 </div>

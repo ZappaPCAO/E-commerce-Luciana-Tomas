@@ -75,7 +75,7 @@ export class ProductServiceService {
   }
 
   public getByPriceRange(priceMin: number, priceMax: number): Observable<any> {
-    return this.http.get(`${this.urlAPI}/?price_min=${priceMin}_max=${priceMax}`);
+    return this.http.get(`${this.urlAPI}/?price_min=${priceMin}&price_max=${priceMax}`);
   }
 
 }
