@@ -11,7 +11,13 @@ const routes: Routes = [
   { path: 'detail-product/:id', component: CardDetailComponent},
   { path: 'product/:id', component: ProductFormComponent},
   { path: 'cart', component: CartComponent},
-  { path: 'product-list', component: ProductListComponent},
+  { path: 'product-list', component: ProductListComponent, 
+    children: [
+      { path: ':title', component: ProductListComponent},
+      { path: ':price', component: ProductListComponent},
+      { path: ':priceMin/:priceMax', component: ProductListComponent}
+  ]
+},
   { path: '**', component: ProductListComponent },
 ];
 

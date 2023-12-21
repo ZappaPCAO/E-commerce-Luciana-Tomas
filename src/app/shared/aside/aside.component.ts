@@ -26,8 +26,24 @@ export class AsideComponent implements OnInit{
   filterByTitle(){
     this.service.getByTitle(this.title).subscribe((product: Product[]) => {
       this.service.productList = product;
-      this.router.navigate([''])
+      this.router.navigate(['product-list',this.title])
 
     });
   }
+
+  filterByPrice(){
+    this.service.getByPrice(this.price).subscribe((product: Product[]) => {
+      this.service.productList = product;
+      this.router.navigate(['product-list',this.price])
+
+    });
+  }
+
+  filterByPriceRange(){
+    this.service.getByPriceRange(this.priceMin, this.priceMax).subscribe((product: Product[]) => {
+      this.service.productList = product;
+      this.router.navigate(['product-list',this.priceMin,this.priceMax]);
+    });
+  }
+
 }
