@@ -12,7 +12,7 @@ import { ProductServiceService } from 'src/app/services/product-service.service'
 })
 export class AsideComponent implements OnInit{
   categories: Category[] = [];
-  idCategory!: number; //Para filtrar
+  idCategory: number = 0; //Para filtrar
 
   title!: string;
   priceMin!: number;
@@ -53,66 +53,107 @@ export class AsideComponent implements OnInit{
   //   });
   // }
 
+  concatRuta(rutaConcat: string, tipo:string){
+    if(rutaConcat)
+      rutaConcat += '/';
+    
+      rutaConcat += `${ (tipo=='title')    ? this.title : 
+                        (tipo=='category') ? this.categories.find(idCat => idCat.id == this.idCategory)?.name :
+                                           ((this.priceMin) ? this.priceMin : 1) + '/'+
+                                           ((this.priceMax) ? this.priceMax : 9999999)
+                                            }`;                               
+    
+    return rutaConcat;
+  }
+
+  concatFiltro(filtroConcat: string, tipo:string){
+    if(filtroConcat)
+      filtroConcat += '&';
+    
+    filtroConcat += `${ (tipo=='title')    ? "title=" + this.title : 
+                        (tipo=='category') ? 'categoryId=' + this.idCategory :
+                                             'price_min='  + ((this.priceMin) ? this.priceMin : 1) +
+                                             '&price_max=' + ((this.priceMax) ? this.priceMax : 9999999)
+                                          }`;                               
+    return filtroConcat;
+  }
+
   verifFilter(){
     let filtroConcat: string = '';
     let rutasParametros: string = '';
-
-    if(this.title){
-      if(!filtroConcat){
-        filtroConcat = `title=${this.title}`;
-        rutasParametros += `${this.title}`;
-      }
-    }
-
-    // if(this.price ){
-    //   // Si es el primer filtro que aplica..
+    // if(this.title){
     //   if(!filtroConcat){
-    //     filtroConcat += `price=${this.price}`;
-    //     rutasParametros += `${this.price}`;
-    //   }else{
-    //     filtroConcat += `&price=${this.price}`;
-    //     rutasParametros += `/${this.price}`;
+    //     filtroConcat = `title=${this.title}`;
+    //     rutasParametros += `${this.title}`;
     //   }
     // }
-    if (this.idCategory ){
-      if(!filtroConcat){
-        filtroConcat += `categoryId=${this.idCategory}`;
-        rutasParametros += `${this.idCategory}`;
-      }else{
-        filtroConcat += `&categoryId=${this.idCategory}`;
-        rutasParametros += `/${this.idCategory}`;
+    // if (this.idCategory ){
+    //   if(!filtroConcat){
+    //     filtroConcat += `categoryId=${this.idCategory}`;
+    //     rutasParametros += `${this.idCategory}`;
+    //   }else{
+    //     filtroConcat += `&categoryId=${this.idCategory}`;
+    //     rutasParametros += `/${this.idCategory}`;
+    //   }
+    // }
+    // if ( this.priceMin && this.priceMax ) {
+    //   // Si es el primer filtro que aplica..
+    //   if(!filtroConcat){
+    //     filtroConcat += `price_min=${this.priceMin}&price_max=${this.priceMax}`;
+    //     rutasParametros += `${this.priceMin}/${this.priceMax}`;
+    //   }else{
+    //     filtroConcat += `&price_min=${this.priceMin}&price_max=${this.priceMax}`;
+    //     rutasParametros += `/${this.priceMin}/${this.priceMax}`;
+    //   }      
+    // }else if(this.priceMin){ // Solo min
+    //   if(!filtroConcat){
+    //         filtroConcat += `price=${this.priceMin}`;
+    //         rutasParametros += `${this.priceMin}`;
+    //       }else{
+    //         filtroConcat += `&price=${this.priceMin}`;
+    //         rutasParametros += `/${this.priceMin}`;
+    //       }
+    // }else if(this.priceMax){ // Solo max
+    //   if(!filtroConcat){
+    //     filtroConcat += `price_min=1&price_max=${this.priceMax}`;
+    //     rutasParametros += `1/${this.priceMax}`;
+    //   }else{
+    //     filtroConcat += `&price_min=1&price_max=${this.priceMax}`;
+    //     rutasParametros += `/1/${this.priceMax}`;
+    //   }      
+    // }
+    
+    let aux = '';
+    if(this.title){
+      aux = this.concatFiltro(filtroConcat, 'title');
+      if(aux){  
+        rutasParametros = this.concatRuta(rutasParametros, 'title');
+        filtroConcat = aux;
       }
+      aux = '';      
     }
-    if ( this.priceMin && this.priceMax ) {
-      // Si es el primer filtro que aplica..
-      if(!filtroConcat){
-        filtroConcat += `price_min=${this.priceMin}&price_max=${this.priceMax}`;
-        rutasParametros += `${this.priceMin}/${this.priceMax}`;
-      }else{
-        filtroConcat += `&price_min=${this.priceMin}&price_max=${this.priceMax}`;
-        rutasParametros += `/${this.priceMin}/${this.priceMax}`;
-      }      
-    }else if(this.priceMin){ // Solo min
-      if(!filtroConcat){
-            filtroConcat += `price=${this.priceMin}`;
-            rutasParametros += `${this.priceMin}`;
-          }else{
-            filtroConcat += `&price=${this.priceMin}`;
-            rutasParametros += `/${this.priceMin}`;
-          }
-    }else if(this.priceMax){ // Solo max
-      if(!filtroConcat){
-        filtroConcat += `price_min=1&price_max=${this.priceMax}`;
-        rutasParametros += `1/${this.priceMax}`;
-      }else{
-        filtroConcat += `&price_min=1&price_max=${this.priceMax}`;
-        rutasParametros += `/1/${this.priceMax}`;
-      }      
+    if(this.idCategory){
+      aux = this.concatFiltro(filtroConcat, 'category');
+      if(aux){  
+        rutasParametros = this.concatRuta(rutasParametros, 'category');
+        filtroConcat = aux;
+      }
+      aux = '';   
     }
+    if(this.priceMin || this.priceMax) {
+      aux = this.concatFiltro(filtroConcat, 'min');
+      if(aux){  
+        rutasParametros = this.concatRuta(rutasParametros, 'min');
+        filtroConcat = aux;
+      }
+      aux = ''; 
+    }
+
     console.log('soy yo => ', filtroConcat);
     this.service.getByJoinFilter(filtroConcat).subscribe((products: Product[]) => {
       this.service.productList = products;
     })
+
     this.router.navigate([`product-list/${rutasParametros}`]);
   }
 
