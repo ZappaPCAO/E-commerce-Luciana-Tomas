@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
+import { CategoryServiceService } from 'src/app/services/category-service.service';
 import { ProductServiceService } from 'src/app/services/product-service.service';
 
 @Component({
@@ -9,18 +11,24 @@ import { ProductServiceService } from 'src/app/services/product-service.service'
   styleUrls: ['./aside.component.css']
 })
 export class AsideComponent implements OnInit{
+  categories: Category[] = [];
+  idCategory!: number; //Para filtrar
 
   title!: string;
   price!: number;
   priceMin!: number;
   priceMax!: number;
-
+  
   productos!: Product[];
-
-  constructor(public service: ProductServiceService, private router: Router){}
+  
+  constructor(public service: ProductServiceService,
+                public serviceCategories: CategoryServiceService, 
+                  private router: Router){}
 
   ngOnInit(): void {
-    
+    this.serviceCategories.getCategorys().subscribe((categories: Category[])=>{
+      this.categories = categories;
+    });
   }
 
   // filterByTitle(){
@@ -66,12 +74,26 @@ export class AsideComponent implements OnInit{
         rutasParametros += `/${this.price}`;
       }
     }
+    if (this.idCategory ){
+      if(!filtroConcat){
+        filtroConcat += `categoryId=${this.idCategory}`;
+        rutasParametros += `${this.idCategory}`;
+      }else{
+        filtroConcat += `&categoryId=${this.idCategory}`;
+        rutasParametros += `/${this.idCategory}`;
+      }
+    }
     if ( this.priceMin || this.priceMax ) {
       // Si es el primer filtro que aplica..
-      filtroConcat += (!filtroConcat) ? `price_min=${this.priceMin}&price_max=${this.priceMax}`
-                                      :`&price_min=${this.priceMin}&price_max=${this.priceMax}`;
-      rutasParametros = `${this.priceMin}/${this.priceMax}`;
+      if(!filtroConcat){
+        filtroConcat += `price_min=${this.priceMin}&price_max=${this.priceMax}`;
+        rutasParametros += `${this.priceMin}/${this.priceMax}`;
+      }else{
+        filtroConcat += `&price_min=${this.priceMin}&price_max=${this.priceMax}`;
+        rutasParametros += `/${this.priceMin}/${this.priceMax}`;
+      }      
     }
+
     this.service.getByJoinFilter(filtroConcat).subscribe((products: Product[]) => {
       this.service.productList = products;
     })

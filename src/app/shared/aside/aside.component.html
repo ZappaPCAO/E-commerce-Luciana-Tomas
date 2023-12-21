@@ -1,24 +1,59 @@
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Filtrossss SsSs</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <div class="row">
+        <div class="row p-4">
+            <div class="col-6">
+                <div class="form-floating mb-3 mb-md-0">
+                    <input name="price" class="form-control border-2" [(ngModel)]="title"
+                        type="text" min="1" placeholder="">
+                    <label>Titulo:</label>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-floating mb-3 mb-md-0">
+                    <input name="price" class="form-control border-2" [(ngModel)]="price"
+                        type="number" min="1" placeholder="">
+                    <label>Precio: </label>
+                </div>
+            </div>           
+        </div>
+        <div class="row p-4">
+            <div class="col-6">
+                <div class="form-floating mb-3 mb-md-0">
+                    <input name="price" class="form-control border-2" [(ngModel)]="priceMin"
+                        type="number" min="1" placeholder="">
+                    <label>Precio min:</label>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-floating mb-3 mb-md-0">
+                    <input name="price" class="form-control border-2" [(ngModel)]="priceMax"
+                        type="number" min="1" placeholder="">
+                    <label>Precio max:</label>
+                </div>
+            </div>            
+        </div>    
+        <div class="row p-4">
             <div class="col-12">
-                <input type="text" [(ngModel)]="title">
-                <input type="number" [(ngModel)]="price">
+                <div class="form-floating mb-3 mb-md-0">
+                    <select name="categoryId" class="form-control" [(ngModel)]="idCategory">
+                        <option *ngFor="let category of categories" value="{{category.id}}">
+                            {{category.name}}
+                        </option>
+                    </select>
+                    <label>Categoría:</label>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <input type="number" [(ngModel)]="priceMin" placeholder="Min">
+        <div class="row ms-3">
+            <div class="col-12">
+                <button class="btn btn-outline-success" (click)="verifFilter()" >Filtrar</button>
             </div>
-            <div class="col-6">
-                <input type="number" [(ngModel)]="priceMax" placeholder="Max">
-            </div>
-        </div>        
-        <button class="btn btn-primary " (click)="verifFilter()" >Filtrar</button>
+        </div>    
+        
     </div>
 </div>

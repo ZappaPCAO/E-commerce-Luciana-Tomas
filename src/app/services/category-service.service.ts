@@ -11,7 +11,7 @@ export class CategoryServiceService {
 
   constructor(private http: HttpClient) { }
 
-  //GET categorys: https://api.escuelajs.co/api/v1/products
+  //GET categorys: https://api.escuelajs.co/api/v1/categories
   public getCategorys():Observable<any>{
     return this.http.get(this.urlAPI);
   }
