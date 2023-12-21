@@ -16,7 +16,9 @@ const routes: Routes = [
       { path: 'buscador',
         children: [
           { path: ':variable', component: ProductListComponent},
-          { path: ':priceMin/:priceMax', component: ProductListComponent}
+          { path: ':variable/:variable2', component: ProductListComponent},
+          { path: ':variable/:variable2/:variable3', component: ProductListComponent},
+          { path: ':variable/:variable2/:variable3/:variable4', component: ProductListComponent}
         ]}
   ]},
   { path: '**', component: ProductListComponent },

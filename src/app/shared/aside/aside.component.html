@@ -5,12 +5,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <button class="btn btn-primary " (click)="filterByTitle()" >Título</button>
-        <button class="btn btn-primary " (click)="filterByPrice()" >Precio</button>
-        <button class="btn btn-primary " (click)="filterByPriceRange()" >Rango</button>
-        <input type="text" [(ngModel)]="title">
-        <input type="number" [(ngModel)]="price">
-        <input type="number" [(ngModel)]="priceMin" placeholder="Min">
-        <input type="number" [(ngModel)]="priceMax" placeholder="Max">
+        <div class="row">
+            <div class="col-12">
+                <input type="text" [(ngModel)]="title">
+                <input type="number" [(ngModel)]="price">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <input type="number" [(ngModel)]="priceMin" placeholder="Min">
+            </div>
+            <div class="col-6">
+                <input type="number" [(ngModel)]="priceMax" placeholder="Max">
+            </div>
+        </div>        
+        <button class="btn btn-primary " (click)="verifFilter()" >Filtrar</button>
     </div>
 </div>

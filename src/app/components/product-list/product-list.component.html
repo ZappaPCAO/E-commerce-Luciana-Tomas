@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-4" *ngFor="let product of this.service.productList">
-            <app-product-card [product]="product" [routerLink]="['detail-product', product.id]" ></app-product-card>
+            <app-product-card [product]="product" routerLink='/detail-product/{{product.id}}' ></app-product-card>
         </div>
     </div>
 </div>

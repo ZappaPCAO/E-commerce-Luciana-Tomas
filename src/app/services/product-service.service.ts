@@ -78,4 +78,8 @@ export class ProductServiceService {
     return this.http.get(`${this.urlAPI}/?price_min=${priceMin}&price_max=${priceMax}`);
   }
 
+  public getByJoinFilter(filtros: string): Observable<any>{
+    return this.http.get(`${this.urlAPI}/?${filtros}`);
+  } 
+
 }
