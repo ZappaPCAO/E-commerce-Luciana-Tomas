@@ -57,10 +57,17 @@ export class AsideComponent implements OnInit{
       }
     }
     if(this.price){
-      filtroConcat += (!filtroConcat) ? `price=${this.price}` : `&price=${this.price}`;
-      rutasParametros += (!filtroConcat) ? `${this.price}` : `/${this.price}`;
+      // Si es el primer filtro que aplica..
+      if(!filtroConcat){
+        filtroConcat += `price=${this.price}`;
+        rutasParametros += `${this.price}`;
+      }else{
+        filtroConcat += `&price=${this.price}`;
+        rutasParametros += `/${this.price}`;
+      }
     }
     if ( this.priceMin || this.priceMax ) {
+      // Si es el primer filtro que aplica..
       filtroConcat += (!filtroConcat) ? `price_min=${this.priceMin}&price_max=${this.priceMax}`
                                       :`&price_min=${this.priceMin}&price_max=${this.priceMax}`;
       rutasParametros = `${this.priceMin}/${this.priceMax}`;

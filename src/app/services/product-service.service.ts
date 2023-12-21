@@ -66,17 +66,17 @@ export class ProductServiceService {
 
   //Filtros:
 
-  public getByTitle(title: String): Observable<any> {
-    return this.http.get(`${this.urlAPI}/?title=${title}`);
-  }
+  // public getByTitle(title: String): Observable<any> {
+  //   return this.http.get(`${this.urlAPI}/?title=${title}`);
+  // }
 
-  public getByPrice(price: number): Observable<any> {
-    return this.http.get(`${this.urlAPI}/?price=${price}`);
-  }
+  // public getByPrice(price: number): Observable<any> {
+  //   return this.http.get(`${this.urlAPI}/?price=${price}`);
+  // }
 
-  public getByPriceRange(priceMin: number, priceMax: number): Observable<any> {
-    return this.http.get(`${this.urlAPI}/?price_min=${priceMin}&price_max=${priceMax}`);
-  }
+  // public getByPriceRange(priceMin: number, priceMax: number): Observable<any> {
+  //   return this.http.get(`${this.urlAPI}/?price_min=${priceMin}&price_max=${priceMax}`);
+  // }
 
   public getByJoinFilter(filtros: string): Observable<any>{
     return this.http.get(`${this.urlAPI}/?${filtros}`);
