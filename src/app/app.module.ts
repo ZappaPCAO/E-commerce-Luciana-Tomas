@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { CardDetailComponent } from './components/card-detail/card-detail.component';
 import { CartComponent } from './components/cart/cart.component';
+import { AsideComponent } from './shared/aside/aside.component';
 
 
 
@@ -25,7 +26,8 @@ import { CartComponent } from './components/cart/cart.component';
     ProductFormComponent,
     ProductCardComponent,
     CardDetailComponent,
-    CartComponent
+    CartComponent,
+    AsideComponent
   ],
   imports: [
     BrowserModule,
