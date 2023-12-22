@@ -22,7 +22,7 @@ export class CardDetailComponent implements OnInit{
       
       this.service.getProduct(id).subscribe((producto) => {
         this.producto = producto;
-        console.log('soy yo -> ' + this.producto);
+        console.log(this.producto);
       })
 
     });
@@ -38,13 +38,15 @@ export class CardDetailComponent implements OnInit{
   
     if (itemExistente) {
           // Si el objeto ya existe, actualizar la cantidad
-          itemExistente.cant! += this.producto.cant!;
+          let cant = itemExistente.cant || 1;
+          itemExistente.cant = cant + 1;
       } else {
           // Si el objeto no existe, agregar uno nuevo al arreglo
           const newItem: Product = this.producto;
+          newItem.cant = 1;
           cart.push(newItem);
       }
     // Guardar el arreglo actualizado en el localStorage
-      localStorage.setItem('items', JSON.stringify("cart"));
+      localStorage.setItem('items', JSON.stringify(cart));
   }
 }

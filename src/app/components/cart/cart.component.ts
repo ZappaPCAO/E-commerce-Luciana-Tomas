@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 
 
@@ -8,10 +8,14 @@ import { Product } from 'src/app/models/product';
   styleUrls: ['./cart.component.css']
 })
 
-export class CartComponent {
-
+export class CartComponent implements OnInit{
+cart!: Product[];
   constructor(){}
 
-
+ngOnInit(): void {
+  
+  this.cart = JSON.parse(localStorage.getItem("items") || "[]");
+  
+}
 
 }

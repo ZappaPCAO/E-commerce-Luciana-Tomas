@@ -26,15 +26,15 @@
             </button>
         </div>
     </div>
-    <div class="col-6 p-2">
+    <div class="col-6 p-2" *ngIf="producto">
         <div class="row">
             <div class="col-12">
-                <p class="h4"><strong>Categoria: </strong>{{producto.category.name}}</p>
+                <p class="h4"><strong>{{producto.title}}</strong></p>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <p><strong>Titulo: </strong>{{producto.title}}</p>
+                <p><strong>Categoría: </strong>{{producto.category.name}}</p>
                 <p><strong>Descripcion: </strong>{{producto.description}}</p>
                 <p class="h6"><strong>Precio: </strong>{{producto.price}}</p>
                 <p><strong>Cantidad: </strong> 1</p>
